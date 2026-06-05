@@ -16,31 +16,3 @@ export function renderLogin(){
     </div>
     `
 }
-
-async function addEvents() {
-    await showUsers()
-    const form= document.getElementById("loginForm")
-    if(!form) return
-    form.addEventListener("submit", handleLogin)
-}
-
-async function handleLogin(e){
-    e.preventDefault()
-    const email= document.getElementById("email").value
-    const password= document.getElementById("password").value
-    const message= document.getElementById("message")
-    try {
-        const user= await loginUser(email, password)
-        if(!user){
-            message.textContent= "Invalid credentials"
-            return
-        }
-        message.textContent= "Login successful"
-        localStorage.setItem("user", JSON.stringify(user))
-        window.location.hash= "#home"
-    }
-    catch(error){
-        message.textContent= "Server error"
-    }
-}
-
