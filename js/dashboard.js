@@ -29,33 +29,3 @@ export function renderDashboard(projects){
     `
 }
 
-async function fillDashboard(){
-    const URL= "http://localhost:5000/projects"
-    const response= await fetch(URL)
-    const projects= await response.json()
-    let tableContent= document.getElementById("table-content")
-    projects.forEach(project => {
-        tableContent.innerHTML+= `
-        <tr>
-            <td>${project.id}</td>
-            <td>${project.name}</td>
-            <td>${project.description}</td>
-            <td>${project.status}</td>
-            <td>${project.assignedTo}</td>
-            <td>
-                <button class="update-btn btn btn-primary">
-                    Edit
-                </button>
-                <button class="del-btn btn btn-danger">
-                    Delete
-                </button>
-            </td>
-        </tr>
-        `
-        const updateBtn= document.querySelector(".update-btn")
-        updateBtn.addEventListener("click", () => {
-            
-        })
-    })
-}
-
