@@ -1,4 +1,4 @@
-import { renderHeader, addHeaderEvents } from "../js/header.js"
+import { renderHeader, addHeaderEvents } from "./header.js"
 
 export function renderHome(){
     setTimeout(() => {
@@ -33,7 +33,7 @@ export function renderHome(){
     `
 }
 async function getProjects(){
-    const URL= "http://localhost:5000/projects"
+    const URL= "http://localhost:5000/reservations"
     const response= await fetch(URL)
     const allProjects= await response.json()
     const total= document.getElementById("total-projects")
@@ -41,7 +41,7 @@ async function getProjects(){
     const completed= document.getElementById("completed-projects")
     allProjects.forEach(project => {
         total.innerHTML= `${allProjects.length}`
-        if(project.status=== "In Progress"){
+        if(project.status=== "pending"){
             active.innerHTML= `${allProjects.length}`
         }
         else{

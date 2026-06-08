@@ -82,3 +82,26 @@ export function renderSettings(){
     </main>
     `
 }
+function editUser(user){
+    const URL= "http://localhost:5000/users"
+    const editForm= document.getElementById("settings-form")
+    editForm.addEventListener("submit", async (e) => {
+        e.preventDefault()
+        const newUser= {
+            "id": user.id,
+            "name": document.getElementById("name").value,
+            "email": document.getElementById("email").value,
+            "password": document.getElementById("password").value,
+            "role": user.role
+        }
+        await fetch(`${URL}/${user.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newUser)
+        })
+        localStorage.setItem("user", JSON.stringify(newUser))
+        window.location= "#home"
+    })
+}

@@ -17,7 +17,7 @@ const error= {
 
 export function renderRoute(){
     const app= document.getElementById("app")
-    const path= window.location.hash || "#home"
+    const path= window.location.hash || "#"
     const renderFunction= routes[path] || error["#404"]
     app.innerHTML= renderFunction()
 }

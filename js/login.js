@@ -16,3 +16,31 @@ export function renderLogin(){
     </div>
     `
 }
+
+async function addEvents(){
+  await showUsers()
+  const form= document.getElementById("loginForm")
+  if (!form){
+    return
+  }
+  form.addEventListener("submit", handleLogin)
+}
+
+async function handleLogin(e){
+  e.preventDefault()
+  const message= document.getElementById("message")
+  try{
+    const user= await loginUser(document.getElementById("email").value, document.getElementById("password").value)
+    if(!user){
+      message.textContent= "Invalid credentials, please try it again"
+      return
+    }
+    message.textContent= "Login successfull"
+    localStorage.setItem("user", JSON.stringify(user))
+    window.location.hash= "#home"
+  }
+  catch(e){
+    message.textContent= "Unable to fetch"
+  }
+}
+
